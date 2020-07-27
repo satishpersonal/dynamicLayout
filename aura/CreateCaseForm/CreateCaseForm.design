@@ -1,0 +1,8 @@
+<design:component>
+	<design:attribute name="recordId" label="recordId"/>
+    <design:attribute name="UpdatedCaseRecord" label="UpdatedCaseInfo"/>
+    <design:attribute name="ParentCaseRecord" label="ParentCaseInfo"/>
+    <design:attribute name="sObjectName" label="Object Name"/>
+    <design:attribute name="profileName" label="Profile Name"/>
+    <design:attribute name="recordTypeDeveloperName" label="Record Type"/>
+</design:component>

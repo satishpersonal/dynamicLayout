@@ -1,0 +1,45 @@
+<!-- ********************************************************************************************
+* @Author:       Accenture IDC 
+* @Date:         21/JUL/2020
+* @Description: A Reusable component to Display the layout same as Detail Page - Clone Functionality
+* @Revision(s): [Date] - [Change Reference] - [Changed By] - [Description]
+*********************************************************************************************** -->
+<aura:component implements="lightning:availableForFlowScreens" access="global" controller="LightningRecordEditFormController">
+
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="layoutSections" type="List" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="UpdatedCaseRecord" type="Case"/>
+    <aura:attribute name="ParentCaseRecord" type="Case"/>
+    <aura:attribute name="sObjectName" type="String"/>
+    <aura:attribute name="profileName" type="String"/>
+    <aura:attribute name="recordTypeDeveloperName" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:card>
+        <aura:if isTrue="{!v.showSpinner}">
+            <lightning:spinner variant="brand" />
+        </aura:if>
+            <lightning:recordEditForm aura:id="caseform" recordId="{!v.recordId}"
+                onload="{!c.handleLoad}"
+                objectApiName="Case" onsubmit="{!c.handleSubmit}">
+                <aura:iteration items="{!v.layoutSections}" var="section">
+                    <div class="slds-section slds-is-open">
+                    	<h3 class="slds-section__title">
+                            {!section.label}
+                        </h3>
+                        <div class="slds-section__content">
+                            <lightning:layout multipleRows="{!section.totalColumns >= 1 }">
+                                <aura:iteration items="{!section.lstFields}" var="field">
+                                    <lightning:layoutItem size="{! 12/section.totalColumns }" padding="around-small">
+                                            <lightning:inputField fieldName="{!field.fieldName}" onchange="{!c.handleChange}"/>
+                                    </lightning:layoutItem>
+                                </aura:iteration>
+                         </lightning:layout>
+                        </div>
+                    </div>
+                </aura:iteration>
+            </lightning:recordEditForm>
+    </lightning:card>
+</aura:component>
